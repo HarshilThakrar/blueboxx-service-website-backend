@@ -28,9 +28,18 @@ class ContactController extends Controller
             $device = 'Mobile';
         }
 
+        $validated = $request->validated();
+
         // Store Lead
         $lead = ContactLead::create([
-            ...$request->validated(),
+            'name' => $validated['fullName'],
+            'company' => $validated['companyName'] ?? null,
+            'email' => $validated['email'],
+            'phone' => $validated['phone'] ?? null,
+            'service' => $validated['service'] ?? null,
+            'budget' => $validated['budget'] ?? null,
+            'timeline' => $validated['timeline'] ?? null,
+            'message' => $validated['message'],
             'ip_address' => $ip_address,
             'browser' => $browser,
             'device' => $device,
