@@ -32,14 +32,7 @@ class ContactController extends Controller
 
         // Store Lead
         $lead = ContactLead::create([
-            'name' => $validated['fullName'],
-            'company' => $validated['companyName'] ?? null,
-            'email' => $validated['email'],
-            'phone' => $validated['phone'] ?? null,
-            'service' => $validated['service'] ?? null,
-            'budget' => $validated['budget'] ?? null,
-            'timeline' => $validated['timeline'] ?? null,
-            'message' => $validated['message'],
+            ...$request->validated(),
             'ip_address' => $ip_address,
             'browser' => $browser,
             'device' => $device,
